@@ -65,7 +65,27 @@ public class AccountBalanceCalculatorTest {
         List<Transaction> history = AccountBalanceCalculator.getTransactionHistory();
         assertTrue(history.isEmpty(), "Transaction history should be empty before calculating balance");
     }
+
+    @Test
+    void testWithdrawalShouldNotMakeBalanceNegative() {
+        int balance1 = AccountBalanceCalculator.calculateBalance(
+                Arrays.asList(new Transaction(TransactionType.WITHDRAWAL, 100))
+        );
+        assertEquals(0, balance1, "Balance must not go negative");
+        int balance2 = AccountBalanceCalculator.calculateBalance(
+                Arrays.asList(
+                        new Transaction(TransactionType.DEPOSIT, 50),
+                        new Transaction(TransactionType.WITHDRAWAL, 80)
+                )
+        );
+        assertEquals(50, balance2, "Overdraft withdrawal must be ignored");
+    }
+
+
+
 }
+
+
 
 //    @Test
 //    void testTransactionHistoryAfterDeposits() {

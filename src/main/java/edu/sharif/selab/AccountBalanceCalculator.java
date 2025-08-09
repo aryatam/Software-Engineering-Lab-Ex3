@@ -7,16 +7,17 @@ public class AccountBalanceCalculator {
 
     private static List<Transaction> transactionHistory = new ArrayList<>();
 
-    // Method to calculate balance based on transactions
     public static int calculateBalance(List<Transaction> transactions) {
         int balance = 0;
         for (Transaction t : transactions) {
             if (t.getType() == TransactionType.DEPOSIT) {
                 balance += t.getAmount();
             } else if (t.getType() == TransactionType.WITHDRAWAL) {
-                balance -= t.getAmount();
+                // تغییر حداقلی: جلوگیری از منفی شدن
+                if (balance - t.getAmount() >= 0) {
+                    balance -= t.getAmount();
+                }
             }
-
         }
         return balance;
     }
