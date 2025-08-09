@@ -1,6 +1,7 @@
 package edu.sharif.selab;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AccountBalanceCalculator {
@@ -9,30 +10,26 @@ public class AccountBalanceCalculator {
 
     public static int calculateBalance(List<Transaction> transactions) {
         int balance = 0;
+        transactionHistory.clear();
+
         for (Transaction t : transactions) {
             if (t.getType() == TransactionType.DEPOSIT) {
                 balance += t.getAmount();
+                transactionHistory.add(t);
             } else if (t.getType() == TransactionType.WITHDRAWAL) {
-                // تغییر حداقلی: جلوگیری از منفی شدن
                 if (balance - t.getAmount() >= 0) {
                     balance -= t.getAmount();
+                    transactionHistory.add(t);
                 }
             }
         }
         return balance;
     }
 
-    // Method to get the transaction history
     public static List<Transaction> getTransactionHistory() {
-        return new ArrayList<>(transactionHistory); // Return a copy to prevent external modification
+        return Collections.unmodifiableList(new ArrayList<>(transactionHistory));
     }
 
-    // Method to add a transaction to the history
-    public static void addTransaction(Transaction transaction) {
-        transactionHistory.add(transaction);
-    }
-
-    // Method to clear the transaction history
     public static void clearTransactionHistory() {
         transactionHistory.clear();
     }
