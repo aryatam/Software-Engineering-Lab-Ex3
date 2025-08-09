@@ -49,3 +49,19 @@
 
 ![img_5.png](img_5.png)
 
+هر تست چه چیزی را برسی میکند؟
+
+| Test name                                              | چه چیزی را بررسی می‌کند (یک‌خطی) |
+|---|---|
+| `testEmptyTransactionList` | با لیست خالی تراکنش، موجودی باید 0 شود. |
+| `testOnlyDeposits` | فقط با واریزها، موجودی برابر مجموع مبالغ واریز باشد. |
+| `testMixedTransactions` | با ترکیب واریز و برداشت معتبر، موجودی نهایی درست محاسبه شود. |
+| `testZeroAmountTransaction` | تراکنش‌های با مبلغ 0 اثری بر موجودی نداشته باشند. |
+| `testTransactionHistoryShouldNotBeNull` | خروجی `getTransactionHistory()` نباید `null` باشد. |
+| `testTransactionHistoryShouldBeEmptyBeforeCalculatingBalance` | قبل از هر محاسبه، تاریخچه باید خالی باشد. |
+| `testWithdrawalShouldNotMakeBalanceNegative` | اگر مبلغ برداشت بیشتر از موجودی بود، تراکنش انجام نشود و موجودی تغییر نکند. |
+| `testTransactionHistoryAfterDeposits` | پس از دو واریز، تاریخچه دقیقاً همان دو تراکنش را داشته باشد. |
+| `testTransactionHistoryAfterDepositsAndWithdrawals` | پس از واریز+برداشت+واریز، تاریخچه هر سه تراکنش معتبر را نگه دارد. |
+| `testTransactionHistoryShouldContainOnlyLastCalculationTransactions` | بعد از محاسبه‌ی دوم، تاریخچه فقط تراکنش‌های محاسبه‌ی آخر را شامل شود. |
+
+
